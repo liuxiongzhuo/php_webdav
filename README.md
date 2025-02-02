@@ -8,4 +8,8 @@ use method:
 nginx:
   rewrite ^/webdav\.php(.*) /webdav.php?path=$1;
 apache:
-  
+  <IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^webdav\.php(/.*)$ /webdav.php?path=$1 [QSA,L]
+  </IfModule>
