@@ -1,15 +1,19 @@
 # php_webdav
 simple php webdav server
 use method:
-  put the webdav.php file in your php server
-  make a dir named 'public'
-  use apache or nginx to rename the request path
+	put the webdav.php file in your php server
+	make a dir named 'public'
+	use apache or nginx to rename the request path
 
 nginx:
-  rewrite ^/webdav\.php(.*) /webdav.php?path=$1;
+```conf
+rewrite ^/webdav\.php(.*) /webdav.php?path=$1;
+```
 apache:
-  <IfModule mod_rewrite.c>
-    RewriteEngine On
-    RewriteBase /
-    RewriteRule ^webdav\.php(/.*)$ /webdav.php?path=$1 [QSA,L]
-  </IfModule>
+```.htaccess
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
+	RewriteRule ^webdav\.php(/.*)$ /webdav.php?path=$1 [QSA,L]
+</IfModule>
+```
