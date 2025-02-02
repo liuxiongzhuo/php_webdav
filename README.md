@@ -1,6 +1,8 @@
 # php_webdav
 simple php webdav server
 
+but now it can be used in windows explorer . I am still trying to solve the problem.
+
 use method:
  - put the webdav.php file in your php server
  - make a dir named 'public'
