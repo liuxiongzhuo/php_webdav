@@ -237,12 +237,10 @@ function copyChilds($srcParentPath, $destPath)
     return true;
 }
 // 身份验证
-if ($_SERVER['REQUEST_METHOD'] != 'OPTIONS') {
-    if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != $username || $_SERVER['PHP_AUTH_PW'] != $password) {
-        header('WWW-Authenticate: Basic realm="WebDAV Secure Area"');
-        http_response_code(401);
-        exit;
-    }
+if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_USER']) || $_SERVER['PHP_AUTH_USER'] != $username || $_SERVER['PHP_AUTH_PW'] != $password) {
+    header('WWW-Authenticate: Basic realm="WebDAV Secure Area"');
+    http_response_code(401);
+    exit;
 }
 //ROOT_DIR
 $ROOT_DIR = 'public';
@@ -261,9 +259,9 @@ if (isset($_GET['path'])) {
 try {
     if ($_SERVER['REQUEST_METHOD'] == 'PROPFIND') {
         header('Content-Type: application/xml; charset=utf-8');
-         (new item($queryPath))->propfind($depth);
+        (new item($queryPath))->propfind($depth);
     } else if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-        header('Allow: OPTIONS, GET,MOVE, PUT, DELETE, PROPFIND');
+        header('Allow: OPTIONS, GET, MOVE, PUT, DELETE, PROPFIND');
         header('DAV: 1,2,3');
         http_response_code(200);
     } else if ($_SERVER['REQUEST_METHOD'] == 'GET') {
